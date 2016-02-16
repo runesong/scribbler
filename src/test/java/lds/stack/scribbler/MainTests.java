@@ -1,4 +1,4 @@
-package lds.stack.scribbles;
+package lds.stack.scribbler;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

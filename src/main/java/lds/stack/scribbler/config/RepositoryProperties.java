@@ -2,9 +2,9 @@
  * Copyright (C) 2016 Robert Thornton. All rights reserved.
  * This notice may not be removed.
  */
-package lds.stack.scribbles.config;
+package lds.stack.scribbler.config;
 
-import lds.stack.scribbles.util.io.IO;
+import lds.stack.scribbler.util.io.IO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;

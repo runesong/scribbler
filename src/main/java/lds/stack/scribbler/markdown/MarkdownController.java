@@ -2,15 +2,14 @@
  * Copyright (C) 2016 Robert Thornton. All rights reserved.
  * This notice may not be removed.
  */
-package lds.stack.scribbles.markdown;
+package lds.stack.scribbler.markdown;
 
-import lds.stack.scribbles.config.RepositoryProperties;
-import lds.stack.scribbles.util.io.IO;
+import lds.stack.scribbler.config.RepositoryProperties;
+import lds.stack.scribbler.util.io.IO;
 import org.pegdown.PegDownProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

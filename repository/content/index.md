@@ -1,6 +1,6 @@
-_Welcome to Scribbles!_
+_Welcome to Scribbler!_
 
-Scribbles is a service-based web content authoring solution. `java -jar <jarname>`.
+Scribbler is a service-based web content authoring solution. `java -jar <jarname>`.
 
 Sdfasfasdfadsfasd fas dfas df asd fasd f sdf asd fas df asdf as df asdf asd fasd fasd fa sdfasd asdfa.
 

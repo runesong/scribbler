@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>lds.stack.sandbox</groupId>
-  <artifactId>scribbles</artifactId>
+  <artifactId>scribbler</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>scribbles</name>
-  <description>A site that renders asciidoc documents.</description>
+  <name>Scribbler</name>
+  <description>A Starter Project for web content management.</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>

@@ -2,7 +2,7 @@
  * Copyright (C) 2016 Robert Thornton. All rights reserved.
  * This notice may not be removed.
  */
-package lds.stack.scribbles;
+package lds.stack.scribbler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

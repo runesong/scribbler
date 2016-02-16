@@ -2,10 +2,10 @@
  * Copyright (C) 2016 Robert Thornton. All rights reserved.
  * This notice may not be removed.
  */
-package lds.stack.scribbles.adoc;
+package lds.stack.scribbler.adoc;
 
-import lds.stack.scribbles.config.RepositoryProperties;
-import lds.stack.scribbles.util.io.IO;
+import lds.stack.scribbler.config.RepositoryProperties;
+import lds.stack.scribbler.util.io.IO;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Attributes;
 import org.asciidoctor.OptionsBuilder;
