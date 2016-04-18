@@ -1,0 +1,13 @@
+browse:
+  enabled: true
+  uri: '{scheme}://{address}:{port}{context-path}{servlet-path}'
+
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: .ssl/keystore
+    key-store-password: password
+    key-alias: scribbler
+    trust-store: .ssl/truststore
+    trust-store-password: password
