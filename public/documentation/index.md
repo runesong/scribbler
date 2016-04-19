@@ -1,1 +1,0 @@
-_This page is a placeholder for documentation resources._

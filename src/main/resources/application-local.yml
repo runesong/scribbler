@@ -1,6 +1,11 @@
+debug: true
+
+logging:
+  level:
+    org.springframework.boot.context.web.OrderedRequestContextFilter: INFO
+
 browse:
-  enabled: true
-  uri: '{scheme}://{address}:{port}{context-path}{servlet-path}'
+  enabled: false
 
 server:
   port: 8443
