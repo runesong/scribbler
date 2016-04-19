@@ -83,11 +83,11 @@ open class LocalConfiguration
 				if (response?.statusCode != null) {
 					LOG.info(String.format(
 							"%n----------------------------------------" +
-									"%n" +
-									"%n The application is ready:" +
-									"%n %s" +
-									"%n" +
-									"%n----------------------------------------", uri
+							"%n" +
+							"%n The application is ready:" +
+							"%n %s" +
+							"%n" +
+							"%n----------------------------------------", uri
 					))
 
 					if (browser!!.enabled) {
