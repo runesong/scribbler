@@ -75,7 +75,7 @@ class DocumentService
 		repository!!.read("include/template.html", output);
 		repository.write(htmlPath, output.toString("UTF-8")
 				.replace("{{title}}", title)
-				.replace("{{path}}", path)
+				.replace("{{path}}", "/" + path)
 				.replace("{{format}}", format)
 				.replace("{{content}}", html))
 	}

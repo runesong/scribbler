@@ -101,10 +101,7 @@
     };
     function editPage() {
         var path = page.sourcePath.value;
-        while (path.charAt(0) === '/') {
-            path = path.substr(1);
-        }
-        var uri = "/" + path;
+        var uri = "" + path;
         console.info("GET " + uri);
         var headers = {
             "accept": "application/json"
@@ -123,7 +120,7 @@
         });
     }
     function addPage() {
-        page.showEditor(new SourceDocument("New Page", "/newpage", "text/markdown", ""));
+        page.showEditor(new SourceDocument("New Page", "/newpage.json", "text/markdown", ""));
     }
     function savePage() {
         var doc = page.createDocument();

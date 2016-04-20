@@ -154,10 +154,7 @@
     function editPage() : void
     {
         let path: string = page.sourcePath.value;
-        while (path.charAt(0) === '/') {
-            path = path.substr(1);
-        }
-        let uri: string = `/${path}`;
+        let uri: string = `${path}`;
         console.info(`GET ${uri}`);
         let headers = {
             "accept" : `application/json`
@@ -178,7 +175,7 @@
 
     function addPage() : void
     {
-        page.showEditor(new SourceDocument("New Page", "/newpage", "text/markdown", ""));
+        page.showEditor(new SourceDocument("New Page", "/newpage.json", "text/markdown", ""));
     }
 
     function savePage() : void

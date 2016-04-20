@@ -19,7 +19,7 @@ class DocumentRepository
 				out.write(content)
 				out.flush()
 			}
-			LOG.info("/{} written", f)
+			LOG.info("{} written", f)
 		} catch (ex: FileNotFoundException) {
 			throw DocumentNotFoundException(f.path, ex)
 		}

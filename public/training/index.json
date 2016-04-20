@@ -1,5 +1,1 @@
-{
-  "title" : "Training",
-  "format" : "text/markdown",
-  "body" : "_This page is a placeholder for user training resources._"
-}
+{"title":"Training","format":"text/markdown","body":"_This page is a placeholder for user training resources._\n\n- [index](/index.html)\n- [documentation](/documentation/index.html)\n- [training](/training//index.html)\n- [newentry](/newpage.html)\n"}

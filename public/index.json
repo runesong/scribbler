@@ -1,1 +1,1 @@
-{"title":"Scribbler","format":"text/markdown","body":"# Foo\n- one\n- two\n- three\n\n# Bar\n- one\n- two\n- three\n\n# Baz\n\n# Bing"}
+{"title":"Scribbler","format":"text/markdown","body":"_Welcome to Scribbler_\n\n- [index](/index.html)\n- [documentation](/documentation/index.html)\n- [training](/training//index.html)\n- [newentry](/newpage.html)\n\n- one\n- two\n- three\n\n# Bar\n- one\n- two\n- three\n\n# Baz\n\n# Bing"}
