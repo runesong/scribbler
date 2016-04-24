@@ -3,139 +3,131 @@
 (function () {
     "use strict";
 
-    class SourceDocument
+    interface Article
     {
         title: string;
         path: string;
         format: string;
         body: string;
-
-        constructor(title: string, path: string, format: string, body: string)
-        {
-            this.title = title;
-            this.path = path;
-            this.format = format;
-            this.body = body;
-        }
     }
 
     class Page
     {
-        titleInput : HTMLInputElement;
-        formatInput: HTMLSelectElement;
-        pathInput :  HTMLInputElement;
-        contentInput : HTMLTextAreaElement;
-        sourcePath : HTMLInputElement;
+        titleField : HTMLInputElement;
+        formatField: HTMLSelectElement;
+        pathField :  HTMLInputElement;
+        bodyField : HTMLTextAreaElement;
+        sourcePathField : HTMLInputElement;
 
-        pageEditorDiv : HTMLDivElement;
-        renderedContentDiv : HTMLDivElement;
-        formGroupDivs : NodeListOf<HTMLDivElement>;
+        pageEditor : HTMLDivElement;
+        renderedBody : HTMLDivElement;
+        formGroups : NodeListOf<HTMLDivElement>;
 
-        addPageButtons: NodeListOf<HTMLAnchorElement>;
-        editPageButtons: NodeListOf<HTMLAnchorElement>;
-        savePageButtons: NodeListOf<HTMLAnchorElement>;
-        cancelPageButtons: NodeListOf<HTMLAnchorElement>;
+        addButtons: NodeListOf<HTMLAnchorElement>;
+        editButtons: NodeListOf<HTMLAnchorElement>;
+        saveButtons: NodeListOf<HTMLAnchorElement>;
+        cancleButtons: NodeListOf<HTMLAnchorElement>;
 
-        pageTitleElements : NodeListOf<HTMLElement>;
+        pageTitle : NodeListOf<HTMLElement>;
 
-        init()
+        init() : void
         {
-            this.titleInput = <HTMLInputElement> document.getElementById("editor-title");
-            this.formatInput = <HTMLSelectElement> document.getElementById("editor-format");
-            this.pathInput = <HTMLInputElement> document.getElementById("editor-path");
-            this.contentInput = <HTMLTextAreaElement> document.getElementById("editor-content");
+            this.titleField  = <HTMLInputElement> document.getElementById("editor-title");
+            this.formatField = <HTMLSelectElement> document.getElementById("editor-format");
+            this.pathField   = <HTMLInputElement> document.getElementById("editor-path");
+            this.bodyField   = <HTMLTextAreaElement> document.getElementById("editor-content");
+            this.sourcePathField = <HTMLInputElement> document.getElementById("source-path");
 
-            this.sourcePath = <HTMLInputElement> document.getElementById("source-path");
-            this.pageTitleElements = <NodeListOf<HTMLElement>> document.getElementsByClassName("page-title");
+            this.pageTitle    = <NodeListOf<HTMLElement>> document.getElementsByClassName("page-title");
+            this.pageEditor   = <HTMLDivElement> document.getElementById("page-editor");
+            this.renderedBody = <HTMLDivElement> document.getElementById("rendered-content");
+            this.formGroups   = <NodeListOf<HTMLDivElement>>document.getElementsByClassName("form-group");
 
-            this.pageEditorDiv = <HTMLDivElement> document.getElementById("page-editor");
-            this.renderedContentDiv = <HTMLDivElement> document.getElementById("rendered-content");
-            this.formGroupDivs = <NodeListOf<HTMLDivElement>>document.getElementsByClassName("form-group");
+            this.addButtons    = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("add-page");
+            this.editButtons   = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("edit-page");
+            this.saveButtons   = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("save-page");
+            this.cancleButtons = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("cancel-page");
 
-            this.addPageButtons = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("add-page");
-            this.editPageButtons = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("edit-page");
-            this.savePageButtons = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("save-page");
-            this.cancelPageButtons = <NodeListOf<HTMLAnchorElement>> document.getElementsByClassName("cancel-page");
-
-            for (let i = 0; i < this.editPageButtons.length; i++) {
-                this.editPageButtons.item(i).addEventListener("click", function (e: MouseEvent) {
+            for (let i = 0; i < this.editButtons.length; i++) {
+                this.editButtons.item(i).addEventListener("click", function (e: MouseEvent) {
                     e.preventDefault();
                     editPage();
                 })
             }
-            for (let i = 0; i < this.addPageButtons.length; i++) {
-                this.addPageButtons.item(i).addEventListener("click", function (e: MouseEvent) {
+            for (let i = 0; i < this.addButtons.length; i++) {
+                this.addButtons.item(i).addEventListener("click", function (e: MouseEvent) {
                     e.preventDefault();
                     addPage();
                 })
             }
-            for (let i = 0; i < this.savePageButtons.length; i++) {
-                this.savePageButtons.item(i).addEventListener("click", function (e: MouseEvent) {
+            for (let i = 0; i < this.saveButtons.length; i++) {
+                this.saveButtons.item(i).addEventListener("click", function (e: MouseEvent) {
                     e.preventDefault();
                     savePage();
                 })
             }
-            for (let i = 0; i < this.cancelPageButtons.length; i++) {
-                this.cancelPageButtons.item(i).addEventListener("click", function (e: MouseEvent) {
+            for (let i = 0; i < this.cancleButtons.length; i++) {
+                this.cancleButtons.item(i).addEventListener("click", function (e: MouseEvent) {
                     e.preventDefault();
                     cancelPage();
                 })
             }
         }
 
-        hideEditor()
+        hideEditor() : void
         {
-            hideItem(this.titleInput);
-            hideItem(this.pathInput);
-            hideItem(this.formatInput);
-            hideItem(this.contentInput);
-            hideItem(this.pageEditorDiv);
+            hideItem(this.titleField);
+            hideItem(this.pathField);
+            hideItem(this.formatField);
+            hideItem(this.bodyField);
+            hideItem(this.pageEditor);
 
-            hideAll(this.savePageButtons);
-            hideAll(this.cancelPageButtons);
-            hideAll(this.formGroupDivs);
+            hideAll(this.saveButtons);
+            hideAll(this.cancleButtons);
+            hideAll(this.formGroups);
 
-            showAll(this.addPageButtons);
-            showAll(this.editPageButtons);
+            showAll(this.addButtons);
+            showAll(this.editButtons);
 
-            showItem(this.renderedContentDiv);
+            showItem(this.renderedBody);
         }
 
-        showEditor(doc: SourceDocument)
+        showEditor(article: Article) : void
         {
-            hideAll(this.addPageButtons);
-            hideAll(this.editPageButtons);
+            hideAll(this.addButtons);
+            hideAll(this.editButtons);
 
-            hideItem(this.renderedContentDiv);
+            hideItem(this.renderedBody);
 
-            showItem(this.titleInput);
-            showItem(this.pathInput);
-            showItem(this.formatInput);
-            showItem(this.contentInput);
-            showItem(this.pageEditorDiv);
+            showItem(this.titleField);
+            showItem(this.pathField);
+            showItem(this.formatField);
+            showItem(this.bodyField);
+            showItem(this.pageEditor);
 
-            showAll(this.savePageButtons);
-            showAll(this.cancelPageButtons);
-            showAll(this.formGroupDivs);
+            showAll(this.saveButtons);
+            showAll(this.cancleButtons);
+            showAll(this.formGroups);
 
-            this.titleInput.value = doc.title;
-            this.pathInput.value = doc.path;
-            this.formatInput.value = doc.format;
-            this.contentInput.value = doc.body;
+            this.titleField.value = article.title;
+            this.pathField.value = article.path;
+            this.formatField.value = article.format;
+            this.bodyField.value = article.body;
 
-            this.contentInput.selectionStart = 0;
-            this.contentInput.selectionEnd = 0;
-            this.contentInput.scrollTop = 0;
-            this.contentInput.focus();
+            this.bodyField.selectionStart = 0;
+            this.bodyField.selectionEnd = 0;
+            this.bodyField.scrollTop = 0;
+            this.bodyField.focus();
         }
 
-        createDocument()
+        createDocument() : Article
         {
-            return new SourceDocument(
-                this.titleInput.value,
-                this.pathInput.value,
-                this.formatInput.value,
-                this.contentInput.value);
+            return {
+                title: this.titleField.value,
+                path: this.pathField.value,
+                format: this.formatField.value,
+                body: this.bodyField.value
+            }
         }
     }
 
@@ -153,7 +145,7 @@
 
     function editPage() : void
     {
-        let path: string = page.sourcePath.value;
+        let path: string = page.sourcePathField.value;
         let uri: string = `${path}`;
         console.info(`GET ${uri}`);
         let headers = {
@@ -163,8 +155,7 @@
         {
             if (xhr.status == 200) {
                 console.info(`${xhr.status}  ${xhr.statusText}`);
-                console.info(xhr.response);
-                let doc : SourceDocument = xhr.response;
+                let doc : Article = xhr.response;
                 doc.path = path;
                 page.showEditor(doc);
             } else {
@@ -175,7 +166,7 @@
 
     function addPage() : void
     {
-        page.showEditor(new SourceDocument("New Page", "/newpage.json", "text/markdown", ""));
+        page.showEditor({ title: "Untitled", path: "/untitled.json", format: "text/markdown", body: ""});
     }
 
     function savePage() : void

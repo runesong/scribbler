@@ -10,10 +10,9 @@ import scribbler.Scribbler;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Scribbler.class)
 @WebAppConfiguration
-public class MainTests
-{
-	@Test
-	public void contextLoads()
-	{
-	}
+public class MainTests {
+
+    @Test
+    public void contextLoads() {
+    }
 }

@@ -87,19 +87,29 @@
   <li><a href="/documentation/index.html">documentation</a></li>
   <li><a href="/training//index.html">training</a></li>
   <li><a href="/newpage.html">newentry</a></li>
-  <li>
-  <p>one</p></li>
-  <li>two</li>
-  <li>three</li>
 </ul>
-<h1><a href="#bar" name="bar"></a>Bar</h1>
-<ul>
-  <li>one</li>
-  <li>two</li>
-  <li>three</li>
-</ul>
-<h1><a href="#baz" name="baz"></a>Baz</h1>
-<h1><a href="#bing" name="bing"></a>Bing</h1>
+<pre><code class="java">package scribbler;
+
+import com.fasterxml.jackson.module.kotlin.KotlinModule;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class Scribbler
+{
+	public static void main(String[] args)
+	{
+		SpringApplication.run(Scribbler.class, args);
+	}
+
+	@Bean
+	KotlinModule kotlinModule()
+	{
+		return new KotlinModule();
+	}
+}
+</code></pre>
     <!-- END CONTENT -->
   </div>
 

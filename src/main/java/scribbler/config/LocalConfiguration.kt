@@ -25,29 +25,26 @@ import kotlin.concurrent.thread
 @Profile("local")
 @Configuration
 @ConditionalOnWebApplication
-open class LocalConfiguration
-{
+open class LocalConfiguration {
+
 	@Bean
 	@ConfigurationProperties("browse")
-	open fun browserProperties(): BrowserProperties
-	{
+	open fun browserProperties(): BrowserProperties {
 		return BrowserProperties()
 	}
 
 	@Bean
-	open fun browserStartupListener(): EmbeddedServletContainerInitializedListener
-	{
+	open fun browserStartupListener(): EmbeddedServletContainerInitializedListener {
 		return EmbeddedServletContainerInitializedListener()
 	}
 
-	class BrowserProperties
-	{
+	class BrowserProperties {
 		var enabled: Boolean = false
 		var uri: UriTemplate = UriTemplate("{scheme}://{address}:{port}{context-path}{servlet-path}")
 	}
 
-	class EmbeddedServletContainerInitializedListener : ApplicationListener<EmbeddedServletContainerInitializedEvent>
-	{
+	class EmbeddedServletContainerInitializedListener : ApplicationListener<EmbeddedServletContainerInitializedEvent> {
+
 		@Autowired
 		private val server: ServerProperties? = null
 
@@ -56,8 +53,7 @@ open class LocalConfiguration
 
 		private val max = 5000L;
 
-		override fun onApplicationEvent(event: EmbeddedServletContainerInitializedEvent)
-		{
+		override fun onApplicationEvent(event: EmbeddedServletContainerInitializedEvent) {
 			thread(name = "startupListener") {
 				if (server!!.ssl.trustStore != null) {
 					System.setProperty("javax.net.ssl.trustStore", server.ssl.trustStore)
@@ -70,7 +66,8 @@ open class LocalConfiguration
 				var exception: Throwable? = null
 				var client = RestTemplate()
 				client.errorHandler = object : DefaultResponseErrorHandler() {
-					override fun handleError(response: ClientHttpResponse) {}
+					override fun handleError(response: ClientHttpResponse) {
+					}
 				}
 				do {
 					try {
@@ -83,11 +80,11 @@ open class LocalConfiguration
 				if (response?.statusCode != null) {
 					LOG.info(String.format(
 							"%n----------------------------------------" +
-							"%n" +
-							"%n The application is ready:" +
-							"%n %s" +
-							"%n" +
-							"%n----------------------------------------", uri
+									"%n" +
+									"%n The application is ready:" +
+									"%n %s" +
+									"%n" +
+									"%n----------------------------------------", uri
 					))
 
 					if (browser!!.enabled) {
@@ -97,8 +94,7 @@ open class LocalConfiguration
 			}
 		}
 
-		private fun buildUri(port: Int): URI
-		{
+		private fun buildUri(port: Int): URI {
 			val variables = HashMap<String, Any>()
 			variables.put("scheme", if (server!!.ssl.isEnabled) "https" else "http")
 			variables.put("address", if (server.address == null) "localhost" else server.address)
@@ -108,8 +104,7 @@ open class LocalConfiguration
 			return browser!!.uri.expand(variables)
 		}
 
-		private fun openBrowser(uri: URI)
-		{
+		private fun openBrowser(uri: URI) {
 			val headless = java.lang.Boolean.getBoolean("java.awt.headless")
 			try {
 				if (headless) {
@@ -127,8 +122,7 @@ open class LocalConfiguration
 			}
 		}
 
-		private fun timedOut(start: Long, exception: Throwable?): Boolean
-		{
+		private fun timedOut(start: Long, exception: Throwable?): Boolean {
 			if (System.currentTimeMillis() - start > max) {
 				if (exception == null) {
 					LOG.error("Listener timed out while waiting for server to start.")
